@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, status
 from . import models
 from .database import engine
 from .routes import posts, users, auth, votes
@@ -24,7 +24,7 @@ app.include_router(users.router)
 app.include_router(auth.router)
 app.include_router(votes.router)
 
-@app.get('/')
+@app.get('/', status_code=status.HTTP_201_CREATED)
 def main():
     return {"Message": "Hello, world"}
 
